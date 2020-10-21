@@ -1,0 +1,35 @@
+.profile {
+  display: flex;
+  flex-flow: row;
+  padding: 20px;
+}
+
+.profile-photo {
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+.profile-info {
+  display: flex;
+  flex-flow: column;
+}
+
+.profile-info:not(:last-child) {
+  margin-right: 15px;
+}
+
+.profile-block {
+
+}
+
+.profile-block:first-of-type {
+  margin-top: 15px;
+}
+
+.profile-block:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.profile-block__title {
+  margin-bottom: 10px;
+}
