@@ -32,4 +32,31 @@
 
 .profile-block__title {
   margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.profile-interests-selected-films {
+  display: flex;
+  flex-flow: row;
+  min-height: 30px;
+  margin-bottom: 10px;
+}
+
+.profile-interests-selected-film {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: #1c3030;
+  color: white;
+}
+
+.profile-interests-selected-film:not(:last-child) {
+  margin-right: 5px;
+}
+
+.profile-interests-item {
+  margin-bottom: 10px;
+}
+
+.profile-interests-item__input {
+  margin: 0 10px;
 }

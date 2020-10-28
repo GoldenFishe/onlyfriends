@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -6,8 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  films = ['Я видел дьявола', 'Олдбой', 'Апокалипсис сегодня', 'Звонок'];
+  film = new FormControl('');
 
-  constructor() { }
+  constructor() {
+  }
+
+  addFilm() {
+    this.films.push(this.film.value);
+    this.film.reset();
+  }
 
   ngOnInit(): void {
   }

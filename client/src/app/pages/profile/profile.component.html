@@ -17,10 +17,18 @@
     </div>
     <div class="profile-block">
       <h6 class="profile-block__title">Интересы</h6>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab at aut corporis doloribus iste minima molestiae
-        molestias nesciunt non optio, quas, quibusdam quis quo reiciendis sequi suscipit totam. Eum, quas!
-      </p>
+      <div class="profile-interests-selected-films">
+        <div class="profile-interests-selected-film" *ngFor="let film of films">
+          {{film}}
+        </div>
+      </div>
+      <form class="profile-interests">
+        <div class="profile-interests-item">
+          <label for="films">Кино</label>
+          <input type="text" id="films" [formControl]="film" class="profile-interests-item__input">
+          <button type="button" (click)="addFilm()">Добавить фильм</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
