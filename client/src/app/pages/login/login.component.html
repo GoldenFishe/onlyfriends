@@ -1,12 +1,12 @@
 <div class="login">
-  <form class="login-form">
+  <form class="login-form" (ngSubmit)="signIn($event)">
     <label class="login-form-item">
       Email
-      <input type="email"/>
+      <input type="email" [formControl]="login"/>
     </label>
     <label class="login-form-item">
       Password
-      <input type="password">
+      <input type="password" [formControl]="password">
     </label>
     <button type="submit">Log In</button>
   </form>

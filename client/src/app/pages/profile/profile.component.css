@@ -60,3 +60,15 @@
 .profile-interests-item__input {
   margin: 0 10px;
 }
+
+.profile-recommendation-profile {
+  border-radius: 10px;
+  width: 100px;
+  height: 100px;
+  border: 1px solid red;
+  display: inline-block;
+}
+
+.profile-recommendation-profile:not(:last-child) {
+  margin-right: 10px;
+}

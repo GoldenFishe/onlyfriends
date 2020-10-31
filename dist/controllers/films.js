@@ -12,11 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.saveFilm = exports.getFilms = void 0;
 const films_1 = require("../models/films");
 exports.getFilms = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const films = yield films_1.getUserFilms();
+    const { userId } = req.body;
+    const films = yield films_1.getUserFilms(userId);
     res.send(films);
 });
 exports.saveFilm = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, user_id } = req.body;
-    const films = yield films_1.saveUserFilm(title, user_id);
-    res.send(films);
+    const { title, userId } = req.body;
+    const film = yield films_1.saveUserFilm(title, userId);
+    res.send(film);
 });

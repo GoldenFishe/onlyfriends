@@ -5,22 +5,20 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {LoginComponent} from './pages/login/login.component';
 import {ProfileModule} from "./pages/profile/profile.module";
 import {ApiService} from "./api.service";
+import {LoginModule} from "./pages/login/login.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    ProfileModule
+    ProfileModule,
+    LoginModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

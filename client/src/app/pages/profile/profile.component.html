@@ -6,7 +6,7 @@
     <button type="button">Написать</button>
   </div>
   <div class="profile-info">
-    <h5>Марлон Брандо</h5>
+    <h5>{{userInfo.name}}</h5>
     <h6>30 лет</h6>
     <div class="profile-block">
       <h6 class="profile-block__title">О себе</h6>
@@ -19,7 +19,7 @@
       <h6 class="profile-block__title">Интересы</h6>
       <div class="profile-interests-selected-films">
         <div class="profile-interests-selected-film" *ngFor="let film of films">
-          {{film}}
+          {{film.title}}
         </div>
       </div>
       <form class="profile-interests">
@@ -29,6 +29,11 @@
           <button type="button" (click)="addFilm()">Добавить фильм</button>
         </div>
       </form>
+    </div>
+    <div class="profile-block">
+      <div class="profile-recommendation-profile" *ngFor="let potentialFriend of potentialFriends">
+        <h6>{{potentialFriend.name}}</h6>
+      </div>
     </div>
   </div>
 </div>
