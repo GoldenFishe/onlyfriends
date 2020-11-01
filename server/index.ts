@@ -3,8 +3,9 @@ import bodyParser from "body-parser";
 import passport from "passport";
 import {Strategy, ExtractJwt} from "passport-jwt";
 
-import {getFilms, saveFilm} from "./controllers/films";
-import {getUserInfo, getUserPotentialFriends, signIn} from "./controllers/user";
+import FilmController from "./controllers/film.controller";
+import UserController from "./controllers/user.controller";
+import AuthController from "./controllers/auth.controller";
 
 const PORT: number | string = process.env.POR || 8080;
 const app: Express = express();
@@ -39,10 +40,11 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/api/sign-in', signIn)
-app.post('/api/films', passport.authenticate('jwt', {session: false}), getFilms);
-app.post('/api/film', saveFilm);
-app.get('/api/user/:userId', getUserInfo);
-app.get('/api/potential-friends/:userId', getUserPotentialFriends);
+app.post('/api/auth/sign-in', AuthController.signIn)
+app.post('/api/auth/sign-up', AuthController.signUp)
+app.post('/api/films', passport.authenticate('jwt', {session: false}), FilmController.getFilms);
+app.post('/api/film', FilmController.saveFilm);
+app.get('/api/user/:userId', UserController.getUserInfo);
+app.get('/api/potential-friends/:userId', UserController.getUserPotentialFriends);
 
 app.listen(PORT, () => console.log(`Server is listening port ${PORT}`));

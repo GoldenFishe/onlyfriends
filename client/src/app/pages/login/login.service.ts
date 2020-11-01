@@ -8,6 +8,6 @@ export class LoginService {
   }
 
   signIn(login: string, password: string) {
-    return this.api.post('/api/sign-in', {login, password});
+    return this.api.post('/api/auth/sign-in', {login, password});
   }
 }
