@@ -6,13 +6,13 @@ import {Strategy, ExtractJwt} from "passport-jwt";
 import FilmController from "./controllers/film.controller";
 import UserController from "./controllers/user.controller";
 import AuthController from "./controllers/auth.controller";
+import {PORT, SECRET_KEY} from "./config";
 
-const PORT: number | string = process.env.POR || 8080;
 const app: Express = express();
 
 const opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'secret'
+    secretOrKey: SECRET_KEY
 }
 passport.use(new Strategy(opts, function (jwt_payload, done) {
     console.log(jwt_payload);

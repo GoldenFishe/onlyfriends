@@ -1,11 +1,12 @@
 import {Pool} from 'pg';
+import {DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER} from "../config";
 
 const pool = new Pool({
-    user: 'ag.riazanov',
-    host: 'localhost',
-    database: 'onlyFriends',
-    password: '666666',
-    port: 5432
+    user: DB_USER,
+    host: DB_HOST,
+    database: DB_NAME,
+    password: DB_PASSWORD,
+    port: DB_PORT
 });
 
 export const query = async (command: string, params?: string[]): Promise<any> => {
