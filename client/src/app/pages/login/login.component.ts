@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     e.preventDefault();
     const login = this.login.value;
     const password = this.password.value;
-    this.service.signIn(login, password).subscribe(user => {
+    this.service.signIn(login, password).subscribe((user: {token: string}) => {
       window.localStorage.setItem('token', user.token)
     });
   }

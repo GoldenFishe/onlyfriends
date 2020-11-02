@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DB_PORT = exports.DB_PASSWORD = exports.DB_NAME = exports.DB_HOST = exports.DB_USER = exports.PORT = exports.REFRESH_SECRET_KEY = exports.ACCESS_SECRET_KEY = void 0;
+exports.ACCESS_SECRET_KEY = 'access_secret';
+exports.REFRESH_SECRET_KEY = 'refresh_secret';
+exports.PORT = process.env.POR || 8080;
+exports.DB_USER = 'ag.riazanov';
+exports.DB_HOST = 'localhost';
+exports.DB_NAME = 'onlyFriends';
+exports.DB_PASSWORD = '666666';
+exports.DB_PORT = 5432;

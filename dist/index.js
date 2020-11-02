@@ -7,17 +7,18 @@ const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const passport_1 = __importDefault(require("passport"));
 const passport_jwt_1 = require("passport-jwt");
-const films_1 = require("./controllers/films");
-const user_1 = require("./controllers/user");
-const PORT = process.env.POR || 8080;
+const film_controller_1 = __importDefault(require("./controllers/film.controller"));
+const user_controller_1 = __importDefault(require("./controllers/user.controller"));
+const auth_controller_1 = __importDefault(require("./controllers/auth.controller"));
+const config_1 = require("./config");
 const app = express_1.default();
 const opts = {
     jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'secret'
+    secretOrKey: config_1.ACCESS_SECRET_KEY
 };
 passport_1.default.use(new passport_jwt_1.Strategy(opts, function (jwt_payload, done) {
     console.log(jwt_payload);
-    return done(null, 'user');
+    return done(null, 'test');
     // User.findOne({id: jwt_payload.sub}, function (err, user) {
     //     if (err) {
     //         return done(err, false);
@@ -39,9 +40,11 @@ app.use((req, res, next) => {
 });
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
-app.post('/api/sign-in', user_1.signIn);
-app.post('/api/films', passport_1.default.authenticate('jwt', { session: false }), films_1.getFilms);
-app.post('/api/film', films_1.saveFilm);
-app.get('/api/user/:userId', user_1.getUserInfo);
-app.get('/api/potential-friends/:userId', user_1.getUserPotentialFriends);
-app.listen(PORT, () => console.log(`Server is listening port ${PORT}`));
+const authMiddleware = passport_1.default.authenticate('jwt', { session: false });
+app.post('/api/auth/sign-in', auth_controller_1.default.signIn);
+app.post('/api/auth/sign-up', auth_controller_1.default.signUp);
+app.post('/api/films', authMiddleware, film_controller_1.default.getFilms);
+app.post('/api/film', authMiddleware, film_controller_1.default.saveFilm);
+app.get('/api/user/:userId', authMiddleware, user_controller_1.default.getUserInfo);
+app.get('/api/potential-friends/:userId', authMiddleware, user_controller_1.default.getUserPotentialFriends);
+app.listen(config_1.PORT, () => console.log(`Server is listening port ${config_1.PORT}`));

@@ -6,17 +6,17 @@ import {Strategy, ExtractJwt} from "passport-jwt";
 import FilmController from "./controllers/film.controller";
 import UserController from "./controllers/user.controller";
 import AuthController from "./controllers/auth.controller";
-import {PORT, SECRET_KEY} from "./config";
+import {PORT, ACCESS_SECRET_KEY} from "./config";
 
 const app: Express = express();
 
 const opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: SECRET_KEY
+    secretOrKey: ACCESS_SECRET_KEY
 }
 passport.use(new Strategy(opts, function (jwt_payload, done) {
     console.log(jwt_payload);
-    return done(null, 'user');
+    return done(null, 'test');
     // User.findOne({id: jwt_payload.sub}, function (err, user) {
     //     if (err) {
     //         return done(err, false);
@@ -40,11 +40,13 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
+const authMiddleware = passport.authenticate('jwt', {session: false});
+
 app.post('/api/auth/sign-in', AuthController.signIn)
 app.post('/api/auth/sign-up', AuthController.signUp)
-app.post('/api/films', passport.authenticate('jwt', {session: false}), FilmController.getFilms);
-app.post('/api/film', FilmController.saveFilm);
-app.get('/api/user/:userId', UserController.getUserInfo);
-app.get('/api/potential-friends/:userId', UserController.getUserPotentialFriends);
+app.post('/api/films', authMiddleware, FilmController.getFilms);
+app.post('/api/film', authMiddleware, FilmController.saveFilm);
+app.get('/api/user/:userId', authMiddleware, UserController.getUserInfo);
+app.get('/api/potential-friends/:userId', authMiddleware, UserController.getUserPotentialFriends);
 
 app.listen(PORT, () => console.log(`Server is listening port ${PORT}`));

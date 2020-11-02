@@ -11,12 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.query = void 0;
 const pg_1 = require("pg");
+const config_1 = require("../config");
 const pool = new pg_1.Pool({
-    user: 'ag.riazanov',
-    host: 'localhost',
-    database: 'onlyFriends',
-    password: '666666',
-    port: 5432
+    user: config_1.DB_USER,
+    host: config_1.DB_HOST,
+    database: config_1.DB_NAME,
+    password: config_1.DB_PASSWORD,
+    port: config_1.DB_PORT
 });
 exports.query = (command, params) => __awaiter(void 0, void 0, void 0, function* () {
     try {

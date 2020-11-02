@@ -6,6 +6,10 @@ class AuthService {
         const [user] = await query(`SELECT * FROM users WHERE login = '${login}' AND password = '${password}'`);
         return user;
     }
+
+    async saveToken(userId: number, token: string): Promise<void> {
+        return query(`UPDATE users SET token = ${token} WHERE id = ${userId}`);
+    }
 }
 
 export default new AuthService();
