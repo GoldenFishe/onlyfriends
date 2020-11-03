@@ -19,7 +19,8 @@ class AuthController {
             const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY);
             await AuthService.saveToken(user.id, refreshToken);
             res.cookie('refresh_token', refreshToken, {
-                expires: new Date(Date.now() + 900000),
+                //expires: new Date(Date.now() + 900000),
+                path: '/',
                 httpOnly: true
             });
             res.send({user, token: accessToken});

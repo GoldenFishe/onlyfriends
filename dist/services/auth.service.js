@@ -19,7 +19,7 @@ class AuthService {
     }
     saveToken(userId, token) {
         return __awaiter(this, void 0, void 0, function* () {
-            return db_1.query(`UPDATE users SET token = ${token} WHERE id = ${userId}`);
+            return db_1.query(`UPDATE users SET token = '${token}' WHERE id = ${userId}`);
         });
     }
 }

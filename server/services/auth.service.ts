@@ -8,7 +8,7 @@ class AuthService {
     }
 
     async saveToken(userId: number, token: string): Promise<void> {
-        return query(`UPDATE users SET token = ${token} WHERE id = ${userId}`);
+        return query(`UPDATE users SET token = '${token}' WHERE id = ${userId}`);
     }
 }
 

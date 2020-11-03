@@ -30,7 +30,8 @@ class AuthController {
                 const refreshToken = jsonwebtoken_1.default.sign(payload, config_1.REFRESH_SECRET_KEY);
                 yield auth_service_1.default.saveToken(user.id, refreshToken);
                 res.cookie('refresh_token', refreshToken, {
-                    expires: new Date(Date.now() + 900000),
+                    //expires: new Date(Date.now() + 900000),
+                    path: '/',
                     httpOnly: true
                 });
                 res.send({ user, token: accessToken });

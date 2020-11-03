@@ -2,6 +2,7 @@ import express, {Express} from "express";
 import bodyParser from "body-parser";
 import passport from "passport";
 import {Strategy, ExtractJwt} from "passport-jwt";
+import cookieParser from "cookie-parser";
 
 import FilmController from "./controllers/film.controller";
 import UserController from "./controllers/user.controller";
@@ -32,9 +33,11 @@ passport.use(new Strategy(opts, function (jwt_payload, done) {
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(cookieParser())
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "*");
+    res.header("Access-Control-Allow-Credentials", "true");
     next();
 });
 app.use(passport.initialize());

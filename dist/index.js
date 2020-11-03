@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const passport_1 = __importDefault(require("passport"));
 const passport_jwt_1 = require("passport-jwt");
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const film_controller_1 = __importDefault(require("./controllers/film.controller"));
 const user_controller_1 = __importDefault(require("./controllers/user.controller"));
 const auth_controller_1 = __importDefault(require("./controllers/auth.controller"));
@@ -33,9 +34,11 @@ passport_1.default.use(new passport_jwt_1.Strategy(opts, function (jwt_payload, 
 }));
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use(body_parser_1.default.json());
+app.use(cookie_parser_1.default());
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "*");
+    res.header("Access-Control-Allow-Credentials", "true");
     next();
 });
 app.use(passport_1.default.initialize());
